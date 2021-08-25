@@ -29,6 +29,9 @@ public class Recipe {
     private Integer cookTime;
     private Integer servings;
     private String source;
+    
+    @Lob
+    private String directions;
     private String url;
     
     // owned by Recipe, cascade to delete ingredients when deleting recipe 
@@ -55,18 +58,18 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-//    public void setNotes(Notes notes) {
-//        if (notes != null) {
-//            this.notes = notes;
-//            notes.setRecipe(this);
-//        }
-//    }
+    public void setNotes(Notes notes) {
+        if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
+    }
 
-//    public Recipe addIngredient(Ingredient ingredient){
-//        ingredient.setRecipe(this);
-//        this.ingredients.add(ingredient);
-//        return this;
-//    }
+    public Recipe addIngredient(Ingredient ingredient){
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
     
     
     public Long getId() {
@@ -137,7 +140,39 @@ public class Recipe {
 		return notes;
 	}
 
-	public void setNotes(Notes notes) {
-		this.notes = notes;
+	public void setDifficulty(Difficulty diff) {
+		this.difficulty = diff;
+		
 	}
+
+	public void setDirections(String directions) {
+		this.directions = directions;
+		
+	}
+
+	public Set<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(Set<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	public String getDirections() {
+		return directions;
+	}
+
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+	
 }
