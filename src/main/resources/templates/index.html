@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Recipes index</title>
 </head>
 <body>
-	<h1>Recipes index</h1>
+	<h2 th:text="'Recipes index'">Index!</h2>
+	
+	
+	<table id="vets" class="table table-striped">
+        <thead>
+	        <tr>
+	            <th style="width: 50px;">Id</th>
+	            <th style="width: 150px;">Name</th>
+	            <th style="width: 150px">Difficulty</th>
+	<!--             <th>Pets</th> -->
+	        </tr>
+        </thead>
+        <tbody>
+          <tr th:each="recipe : ${recipes}">
+          	<td style="width: 50px;" th:text="${recipe.id}">id</td>
+          	<td style="width: 150px;" th:text="${recipe.description}">name</td>
+          	<td style="width: 150px;" th:text="${recipe.difficulty}">surname</td>
+<!--               <td> -->
+<!--                   <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.firstName + ' ' + owner.lastName}"/></a> -->
+<!--               </td> -->
+<!--               <td><span th:each="pet : ${owner.pets}" th:text="${pet.name} "/></td> -->
+          </tr>
+        </tbody>
+    </table>
 </body>
 </html>
