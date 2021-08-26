@@ -10,7 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Ingredient {
 
 	@Id
@@ -34,16 +37,11 @@ public class Ingredient {
         this.uom = uom;
     }
 
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
-        this.description = description;
-        this.amount = amount;
-        this.uom = uom;
-        this.recipe = recipe;
-    }
-
-	public void setRecipe(Recipe recipe2) {
-		this.recipe = recipe2;
-		
-	}
+//    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+//        this.description = description;
+//        this.amount = amount;
+//        this.uom = uom;
+//        this.recipe = recipe;
+//    }
 	
 }
