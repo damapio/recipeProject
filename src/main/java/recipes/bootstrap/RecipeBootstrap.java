@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
 import recipes.domain.Category;
 import recipes.domain.Difficulty;
 import recipes.domain.Ingredient;
@@ -19,6 +20,7 @@ import recipes.repositories.RecipeRepository;
 import recipes.repositories.UnitOfMeasureRepository;
 
 @Component
+@Slf4j
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent>{
 
 	private final CategoryRepository categoryRepository;
@@ -38,6 +40,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	}
     
     private List<Recipe> getRecipes() {
+    	log.debug("Loading recipes");
     	List<Recipe> recipes = new ArrayList<>(2);
     
     	UnitOfMeasure unit = unitOfMeasureRepository.findByDescription("Unit").orElseThrow();

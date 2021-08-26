@@ -1,19 +1,14 @@
 package recipes.controllers;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import recipes.domain.Category;
-import recipes.domain.UnitOfMeasure;
-import recipes.repositories.CategoryRepository;
-import recipes.repositories.RecipeRepository;
-import recipes.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import recipes.services.RecipeService;
 
 @Controller
+@Slf4j
 public class IndexController {
 	
 	private final RecipeService recipeService;
@@ -25,6 +20,7 @@ public class IndexController {
 
 	@RequestMapping({"", "/", "/index", "/index.html"})
 	public String getIndexPage(Model model) {
+		log.debug("Inside the controller");
 		model.addAttribute("recipes", recipeService.getRecipes());
 		
 		return "index";
