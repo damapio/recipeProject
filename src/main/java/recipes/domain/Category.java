@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"recipes"}) //si no, al ser bidireccional, crea una referencia circular
 public class Category {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,9 +8,11 @@ import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"recipe"}) //si no, crea una referencia circular
 public class Notes {
 
 	@Id
