@@ -21,10 +21,10 @@ import recipes.repositories.RecipeRepository;
 @ExtendWith(MockitoExtension.class)
 public class RecipeServiceImplTest {
 
-	@InjectMocks
+	@InjectMocks //clase que los usa
 	RecipeServiceImpl recipeService;
 
-    @Mock
+    @Mock //clase a fingir
     RecipeRepository recipeRepository;
     
     @BeforeEach
@@ -32,6 +32,12 @@ public class RecipeServiceImplTest {
         recipeService = new RecipeServiceImpl(recipeRepository);
     }
     
+    @Test
+    public void getEmptyRecipes() throws Exception {
+        Set<Recipe> recipes = recipeService.getRecipes();
+
+        assertEquals(recipes.size(), 0);
+    }
     
     @Test
     public void getRecipes() throws Exception {
@@ -40,13 +46,12 @@ public class RecipeServiceImplTest {
         HashSet<Recipe> receipesData = new HashSet<Recipe>();
         receipesData.add(recipe);
 
-        when(recipeService.getRecipes()).thenReturn(receipesData);
+        when(recipeRepository.findAll()).thenReturn(receipesData); //devolver los datos falsos al llamar al mock
 
         Set<Recipe> recipes = recipeService.getRecipes();
 
         assertEquals(recipes.size(), 1);
-        verify(recipeRepository, times(1)).findAll();
+        verify(recipeRepository, times(1)).findAll(); //comprobar el método se llama 1 vez y sólo una
     }
-
     
 }
