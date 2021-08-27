@@ -8,35 +8,28 @@ import static org.mockito.Mockito.when;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import recipes.domain.Recipe;
 import recipes.repositories.RecipeRepository;
 
+@ExtendWith(MockitoExtension.class)
 public class RecipeServiceImplTest {
 
+	@InjectMocks
 	RecipeServiceImpl recipeService;
 
     @Mock
     RecipeRepository recipeRepository;
     
-    private AutoCloseable closeable;
-      
-
     @BeforeEach
     public void setUp() throws Exception {
-//        MockitoAnnotations.initMocks(this); // deprecado. Cojonudo
-    	closeable = MockitoAnnotations.openMocks(this); //debería ser un @BeforeAll, pero no lo sé configurar
         recipeService = new RecipeServiceImpl(recipeRepository);
-    }
-    
-    @AfterEach
-    public void releaseMocks() throws Exception {
-        closeable.close();
     }
     
     
