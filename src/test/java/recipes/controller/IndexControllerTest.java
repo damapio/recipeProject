@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -36,6 +37,6 @@ public class IndexControllerTest {
     	
     	assertEquals(index, page);
     	verify(recipeService, times(1)).getRecipes(); //comprobar el método se llama 1 vez y sólo una
-    	verify(model, times(1)).addAttribute("recipes", recipeService.getRecipes()); 
+    	verify(model, times(1)).addAttribute(ArgumentMatchers.eq("recipes"), ArgumentMatchers.anySet()); 
     }
 }
