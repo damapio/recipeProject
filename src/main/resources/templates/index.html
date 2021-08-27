@@ -2,32 +2,54 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+<!-- 	bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+		integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+		crossorigin="anonymous">
 	<title>Recipes index</title>
 </head>
 <body>
-	<h2 th:text="'Recipes index'">Index!</h2>
-	
-	
-	<table id="vets" class="table table-striped">
-        <thead>
-	        <tr>
-	            <th style="width: 50px;">Id</th>
-	            <th style="width: 150px;">Name</th>
-	            <th style="width: 150px">Difficulty</th>
-	<!--             <th>Pets</th> -->
-	        </tr>
-        </thead>
-        <tbody>
-          <tr th:each="recipe : ${recipes}">
-          	<td style="width: 50px;" th:text="${recipe.id}">id</td>
-          	<td style="width: 150px;" th:text="${recipe.description}">name</td>
-          	<td style="width: 150px;" th:text="${recipe.difficulty}">surname</td>
-<!--               <td> -->
-<!--                   <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.firstName + ' ' + owner.lastName}"/></a> -->
-<!--               </td> -->
-<!--               <td><span th:each="pet : ${owner.pets}" th:text="${pet.name} "/></td> -->
-          </tr>
-        </tbody>
-    </table>
+	<div class="container-fluid" style="margin-top: 20px">
+		<h2 th:text="'Recipes index'">Index!</h2>
+		
+		<div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+			<table id="vets" class="table table-striped table-hover">
+		        <thead>
+			        <tr>
+			            <th style="width: 50px;">Id</th>
+			            <th style="width: 150px;">Name</th>
+			            <th style="width: 150px">Difficulty</th>
+			<!--             <th>Pets</th> -->
+			        </tr>
+		        </thead>
+		        <tbody>
+<!--         permite ver como queda la natural template, el html cuando no está corriendo el servidor -->
+<!--         luego thymeleave lo quita -->
+		          <tr th:remove="all">
+		          	<td style="width: 50px;" th:text="${recipe.id}">15</td>
+		          	<td style="width: 150px;" th:text="${recipe.description}">La niña bonita</td>
+		          	<td style="width: 150px;" th:text="${recipe.difficulty}">MEDIUM</td>
+		          	<tr th:remove="all">
+		          	<td style="width: 50px;" th:text="${recipe.id}">22</td>
+		          	<td style="width: 150px;" th:text="${recipe.description}">Los dos patitos</td>
+		          	<td style="width: 150px;" th:text="${recipe.difficulty}">EASY</td>
+<!--         estas son las de verdad	 -->
+		          <tr th:each="recipe : ${recipes}">
+		          	<td style="width: 50px;" th:text="${recipe.id}">id</td>
+		          	<td style="width: 150px;" th:text="${recipe.description}">name</td>
+		          	<td style="width: 150px;" th:text="${recipe.difficulty}">surname</td>
+		<!--               <td> -->
+		<!--                   <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.firstName + ' ' + owner.lastName}"/></a> -->
+		<!--               </td> -->
+		<!--               <td><span th:each="pet : ${owner.pets}" th:text="${pet.name} "/></td> -->
+		          </tr>
+		        </tbody>
+		    </table>
+	    </div>
+    </div>
+<!--     bootstrap JS bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+	    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+	    crossorigin="anonymous"></script>
 </body>
 </html>
