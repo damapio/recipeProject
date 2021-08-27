@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +19,8 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import recipes.controllers.IndexController;
@@ -37,6 +42,15 @@ public class IndexControllerTest {
     }
     
     @Test
+    public void testMockMVC() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"));
+    }
+    
+    @Test
     public void getIndexPage() throws Exception {
     	
     	//given
@@ -48,7 +62,8 @@ public class IndexControllerTest {
 
         when(recipeService.getRecipes()).thenReturn(recipes);
 
-        ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
+        @SuppressWarnings("unchecked")
+		ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 
         //when
     	final String index = "index";
